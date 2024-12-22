@@ -3,8 +3,21 @@ const cors = require("cors");
 require("dotenv").config();
 const app = express();
 
-var corsOptions = {
-  origin: "*",
+const allowedOrigins = [
+  "https://medintuit.netlify.app",
+  "http://localhost:5173",
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
 
 app.use(cors(corsOptions));
