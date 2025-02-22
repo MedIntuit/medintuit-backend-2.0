@@ -3,7 +3,7 @@ const generateApiKey = require("../utils/generateApiKeys");
 
 exports.createChannel = async (req, res) => {
   try {
-    const { name, field1, field2, field3, field4, description } = req.body;
+    const { name, field1, field2, field3, field4, minThreshold, maxThreshold, description } = req.body;
     const apiKey = generateApiKey();
     const userId = req.userId;
 
@@ -13,6 +13,8 @@ exports.createChannel = async (req, res) => {
       field2,
       field3,
       field4,
+      minThreshold,
+      maxThreshold,
       description,
       apiKey,
       userId,

@@ -6,6 +6,8 @@ const ChannelSchema = new mongoose.Schema({
   field2: { type: String, required: false },
   field3: { type: String, required: false },
   field4: { type: String, required: false },
+  minThreshold: {type: Number, required: true},
+  maxThreshold: {type: Number, required: true},
   description: { type: String },
   apiKey: { type: String, required: true, unique: true },
   fieldData: [
