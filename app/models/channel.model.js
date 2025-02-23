@@ -13,6 +13,8 @@ const ChannelSchema = new mongoose.Schema({
   fieldData: [
     {
       field1: { type: String },
+      minThreshold: {type: Number},
+      maxThreshold: {type: Number},
       timestamp: { type: Date, default: Date.now }
     }
   ],
