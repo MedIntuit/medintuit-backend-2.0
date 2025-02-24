@@ -1,5 +1,6 @@
 const Channel = require("../models/channel.model");
 const generateApiKey = require("../utils/generateApiKeys");
+const checkDataSpike = require("../utils/notification");
 
 exports.createChannel = async (req, res) => {
   try {
@@ -47,6 +48,8 @@ exports.updateChannelField = async (req, res) => {
     // Initialize fieldData if it is undefined
     if (!channel.fieldData) {
       channel.fieldData = [];
+    } else {
+      checkDataSpike(channel.maxThreshold, channel.minThreshold, channel.fieldData);
     }
     channel.fieldData.push({ field1, timestamp: new Date() });
     await channel.save();
