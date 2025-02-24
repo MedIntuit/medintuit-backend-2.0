@@ -45,12 +45,12 @@ exports.updateChannelField = async (req, res) => {
     if (!channel) {
       return res.status(404).json({ message: "Channel not found" });
     }
+    checkDataSpike(channel.maxThreshold, channel.minThreshold, field1);
     // Initialize fieldData if it is undefined
     if (!channel.fieldData) {
       channel.fieldData = [];
-    } else {
-      checkDataSpike(channel.maxThreshold, channel.minThreshold, channel.fieldData);
     }
+
     channel.fieldData.push({ field1, timestamp: new Date() });
     await channel.save();
     res.status(200).json({ message: "Data updated successfully" });
